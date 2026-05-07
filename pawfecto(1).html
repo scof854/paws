@@ -389,6 +389,9 @@
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 24px;
   }
+  .services-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
 
   .service-card {
     background: white;
@@ -479,6 +482,16 @@
   }
   .service-feature::before { content: '✓'; color: var(--peach); font-weight: 900; }
   .service-card.featured .service-feature::before { color: var(--peach-light); }
+  .services-list .service-card {
+    min-height: 170px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .services-list .service-name {
+    font-size: 1rem;
+    line-height: 1.35;
+  }
 
   /* ── GALLERY ── */
   .gallery { padding: 100px 0; }
@@ -589,6 +602,7 @@
   }
 
   .booking-info h2 { margin-bottom: 16px; }
+  .booking-cta-inner { grid-template-columns: 1fr 1fr; align-items: stretch; }
 
   .booking-perks {
     display: flex;
@@ -674,13 +688,82 @@
   }
   .form-message.success { color: #2E8B6A; }
   .form-message.error { color: #D4607A; }
+  .viber-card {
+    background: linear-gradient(135deg, #fff, var(--peach-soft));
+    border-radius: var(--radius);
+    padding: 40px;
+    box-shadow: var(--shadow-clay-lg);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255,176,133,.28);
+  }
+  .viber-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 24px;
+    background: #7360F2;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 18px;
+    box-shadow: 0 10px 24px rgba(115,96,242,.25);
+  }
+  .viber-card p {
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-bottom: 22px;
+  }
+  .viber-button {
+    width: 100%;
+    justify-content: center;
+    text-decoration: none;
+    margin-bottom: 14px;
+  }
+  .phone-link {
+    color: var(--brown-dark);
+    font-weight: 900;
+    text-decoration: none;
+  }
 
   /* ── REVIEWS ── */
   .reviews { padding: 100px 0; overflow: hidden; }
   .reviews-header { text-align: center; margin-bottom: 52px; }
   .reviews-header .section-sub { margin: 0 auto; }
 
-  .reviews-track-wrap { overflow: hidden; position: relative; }
+  .reviews-controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: -28px 0 28px;
+  }
+  .review-nav {
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background: var(--brown-dark);
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: var(--shadow-clay);
+    transition: transform .2s, background .2s;
+  }
+  .review-nav:hover { background: var(--brown); transform: translateY(-2px); }
+
+  .reviews-track-wrap {
+    overflow-x: auto;
+    overflow-y: hidden;
+    position: relative;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .reviews-track-wrap::-webkit-scrollbar { display: none; }
   .reviews-track-wrap::before,
   .reviews-track-wrap::after {
     content: '';
@@ -913,11 +996,12 @@
     .hero-float-2 { left: 0; }
     .hero-float-3 { right: 0; }
     .container { padding: 0 24px; }
-    .services { padding: 64px 0; }
+    .services, .gallery, .booking, .reviews, .about { padding: 64px 0; }
     .services-grid { grid-template-columns: 1fr; }
+    .services-list { grid-template-columns: repeat(2, 1fr); }
     .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 220px 220px 220px; }
     .gallery-item:first-child { grid-row: span 1; }
-    .booking-inner { grid-template-columns: 1fr; }
+    .booking-inner, .booking-cta-inner { grid-template-columns: 1fr; gap: 28px; }
     .about-inner { grid-template-columns: 1fr; gap: 40px; }
     .about-img { max-width: 100%; }
     .footer-inner { grid-template-columns: 1fr 1fr; }
@@ -926,10 +1010,73 @@
   }
 
   @media (max-width: 580px) {
+    nav { width: calc(100% - 24px); padding: 10px 16px; }
+    .nav-logo { font-size: 1.35rem; }
+    .hero { min-height: auto; padding: 88px 18px 44px; }
+    .hero-inner { gap: 24px; }
+    .hero-img-card { height: 260px; border-radius: 32px; }
+    .hero-float-badge { padding: 9px 12px; font-size: .78rem; }
+    .hero-float-2, .hero-float-3 { display: none; }
+    .hero h1 { font-size: 2.1rem; }
+    .hero-sub, .section-sub { font-size: .95rem; line-height: 1.55; margin-bottom: 24px; }
+    .hero-actions { flex-direction: column; align-items: stretch; }
+    .hero-actions a { justify-content: center; text-align: center; }
     .hero-stats { gap: 16px; }
+    .hero-stat strong { font-size: 1.4rem; }
+    .container { padding: 0 18px; }
+    .services, .gallery, .booking, .reviews, .about { padding: 44px 0; }
+    .services-header, .gallery-header, .reviews-header { margin-bottom: 24px; }
+    .section-title { font-size: 1.75rem; }
+    .services-list {
+      display: flex;
+      overflow-x: auto;
+      gap: 14px;
+      padding: 4px 18px 18px;
+      margin: 0 -18px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .services-list::-webkit-scrollbar { display: none; }
+    .services-list .service-card {
+      width: 210px;
+      min-width: 210px;
+      min-height: 140px;
+      padding: 22px;
+      scroll-snap-align: start;
+    }
+    .services-list .service-icon {
+      width: 52px;
+      height: 52px;
+      font-size: 1.5rem;
+      margin-bottom: 14px;
+    }
+    .gallery-grid {
+      display: flex;
+      overflow-x: auto;
+      gap: 14px;
+      padding: 4px 18px 18px;
+      margin: 0 -18px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .gallery-grid::-webkit-scrollbar { display: none; }
+    .gallery-item {
+      min-width: 240px;
+      height: 260px;
+      scroll-snap-align: start;
+    }
+    .gallery-label { opacity: 1; transform: none; font-size: .76rem; }
+    .ba-tag { font-size: .68rem; }
+    .booking-perks { margin-top: 22px; }
+    .viber-card { padding: 28px 22px; }
+    .review-card { width: 280px; padding: 22px; }
+    .reviews-controls { margin: -12px 0 20px; }
+    .about-visual { display: none; }
     .about-perks { grid-template-columns: 1fr; }
+    footer { padding: 44px 0 24px; }
     .footer-inner { grid-template-columns: 1fr; }
-    .gallery-grid { grid-template-columns: 1fr; grid-template-rows: repeat(5, 260px); }
   }
 </style>
 </head>
@@ -981,7 +1128,7 @@
       </div>
       <div class="hero-float-badge hero-float-1">🐶 Мягкая шерсть</div>
       <div class="hero-float-badge hero-float-2">💅 Стрижка когтей</div>
-      <div class="hero-float-badge hero-float-3">✨ До/после</div>
+      <div class="hero-float-badge hero-float-3">✨ Классный результат</div>
     </div>
   </div>
 </section>
@@ -991,60 +1138,19 @@
   <div class="container">
     <div class="services-header">
       <div class="section-tag">✂️ Наши услуги</div>
-      <h2 class="section-title">Пакеты груминга</h2>
-      <p class="section-sub">Выберите подходящий пакет — каждый разработан с заботой о здоровье и красоте вашего питомца</p>
+      <h2 class="section-title">Спектр услуг</h2>
+      <p class="section-sub">Всё для аккуратного, безопасного и красивого ухода за кошками и собаками.</p>
     </div>
-    <div class="services-grid">
-      <div class="service-card reveal">
-        <div class="service-icon">🛁</div>
-        <div class="service-name">Базовый</div>
-        <p class="service-desc">Всё самое необходимое для свежести и чистоты вашего питомца.</p>
-        <div class="service-price">от 40 BYN <span>/ сеанс</span></div>
-        <ul class="service-features">
-          <li class="service-feature">Купание + сушка</li>
-          <li class="service-feature">Расчёсывание</li>
-          <li class="service-feature">Чистка ушей</li>
-          <li class="service-feature">Стрижка когтей</li>
-        </ul>
-      </div>
-      <div class="service-card featured reveal">
-        <div class="service-icon">✨</div>
-        <div class="service-name">Комфорт</div>
-        <p class="service-desc">Полноценный уход — для тех, кто хочет всего самого лучшего.</p>
-        <div class="service-price">от 80 BYN <span>/ сеанс</span></div>
-        <ul class="service-features">
-          <li class="service-feature">Всё из базового</li>
-          <li class="service-feature">Авторская стрижка</li>
-          <li class="service-feature">Аромаванна</li>
-          <li class="service-feature">Укладка и styling</li>
-          <li class="service-feature">Бандана в подарок</li>
-        </ul>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-icon">🐱</div>
-        <div class="service-name">Для кошек</div>
-        <p class="service-desc">Специальный уход для пушистых и короткошёрстных кошек.</p>
-        <div class="service-price">от 60 BYN <span>/ сеанс</span></div>
-        <ul class="service-features">
-          <li class="service-feature">Деликатное купание</li>
-          <li class="service-feature">Вычёсывание подшёрстка</li>
-          <li class="service-feature">Чистка ушей и когтей</li>
-          <li class="service-feature">Антистресс-уход</li>
-        </ul>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-icon">💎</div>
-        <div class="service-name">Премиум SPA</div>
-        <p class="service-desc">Королевское обращение для самых избалованных питомцев.</p>
-        <div class="service-price">от 100 BYN <span>/ сеанс</span></div>
-        <ul class="service-features">
-          <li class="service-feature">Всё из Комфорта</li>
-          <li class="service-feature">Маска для шерсти</li>
-          <li class="service-feature">Массаж</li>
-          <li class="service-feature">Фото-сессия</li>
-          <li class="service-feature">Подарочный набор</li>
-        </ul>
-      </div>
+    <div class="services-grid services-list">
+      <div class="service-card reveal"><div class="service-icon">✂️</div><div class="service-name">Стрижка собак и кошек</div></div>
+      <div class="service-card reveal"><div class="service-icon">🐾</div><div class="service-name">Чистка анальной железы</div></div>
+      <div class="service-card reveal"><div class="service-icon">🦷</div><div class="service-name">Чистка зубов</div></div>
+      <div class="service-card reveal"><div class="service-icon">✨</div><div class="service-name">Экспресс-линька</div></div>
+      <div class="service-card reveal"><div class="service-icon">🛁</div><div class="service-name">Гигиеническая стрижка</div></div>
+      <div class="service-card reveal"><div class="service-icon">🧶</div><div class="service-name">Вычесывание колтунов</div></div>
+      <div class="service-card reveal"><div class="service-icon">🌿</div><div class="service-name">SPA-уход</div></div>
+      <div class="service-card reveal"><div class="service-icon">💅</div><div class="service-name">Подстригание когтей</div></div>
+      <div class="service-card reveal"><div class="service-icon">👂</div><div class="service-name">Чистка ушей</div></div>
     </div>
   </div>
 </section>
@@ -1054,43 +1160,43 @@
   <div class="container">
     <div class="gallery-header">
       <div class="section-tag">📸 Результаты</div>
-      <h2 class="section-title">До и после</h2>
-      <p class="section-sub">Смотрите сами — наша работа говорит громче слов</p>
+      <h2 class="section-title">Классный результат</h2>
+      <p class="section-sub">Аккуратные стрижки и ухоженные питомцы после посещения Pawfecto</p>
     </div>
     <div class="gallery-grid reveal">
       <div class="gallery-item">
         <div class="gallery-item-inner" style="background:#EDD5B3">
           <img src="/images/photo_5_2026-05-06_17-51-33.jpg" alt="Померанский шпиц со стрижкой «медвежонок» после груминга" loading="lazy" />
         </div>
-        <div class="gallery-before-after"><span class="ba-tag ba-after">После</span></div>
+        <div class="gallery-before-after"><span class="ba-tag ba-after">Классный результат</span></div>
         <div class="gallery-label">Померанский шпиц — стрижка «медвежонок»</div>
       </div>
       <div class="gallery-item">
         <div class="gallery-item-inner" style="background:#FFE4CC">
           <img src="/images/photo_4_2026-05-06_17-51-33.jpg" alt="Той-пудель рыжего окраса после авторской стрижки" loading="lazy" />
         </div>
-        <div class="gallery-before-after"><span class="ba-tag ba-after">После</span></div>
+        <div class="gallery-before-after"><span class="ba-tag ba-after">Классный результат</span></div>
         <div class="gallery-label">Той-пудель — авторская стрижка</div>
       </div>
       <div class="gallery-item">
         <div class="gallery-item-inner" style="background:#F5F5F5">
           <img src="/images/photo_3_2026-05-06_17-51-33.jpg" alt="Жесткошёрстный фокстерьер после выставочного тримминга в Pawfecto" loading="lazy" />
         </div>
-        <div class="gallery-before-after"><span class="ba-tag ba-after">После</span></div>
+        <div class="gallery-before-after"><span class="ba-tag ba-after">Классный результат</span></div>
         <div class="gallery-label">Жесткошёрстный фокстерьер — выставочный тримминг</div>
       </div>
       <div class="gallery-item">
         <div class="gallery-item-inner" style="background:#F7ECD9">
           <img src="/images/photo_2_2026-05-06_17-51-33.jpg" alt="Мальтезе с классической стрижкой после груминга" loading="lazy" />
         </div>
-        <div class="gallery-before-after"><span class="ba-tag ba-after">После</span></div>
+        <div class="gallery-before-after"><span class="ba-tag ba-after">Классный результат</span></div>
         <div class="gallery-label">Мальтезе — классическая стрижка</div>
       </div>
       <div class="gallery-item">
         <div class="gallery-item-inner" style="background:#FFE4CC">
           <img src="/images/photo_1_2026-05-06_17-51-32.jpg" alt="Померанский шпиц после стрижки «плюшевый мишка»" loading="lazy" />
         </div>
-        <div class="gallery-before-after"><span class="ba-tag ba-after">После</span></div>
+        <div class="gallery-before-after"><span class="ba-tag ba-after">Классный результат</span></div>
         <div class="gallery-label">Померанский шпиц — стрижка «плюшевый мишка»</div>
       </div>
     </div>
@@ -1100,94 +1206,28 @@
 <!-- BOOKING -->
 <section class="booking" id="booking">
   <div class="container">
-    <div class="booking-inner">
+    <div class="booking-inner booking-cta-inner">
       <div class="booking-info reveal">
         <div class="section-tag">📅 Запись</div>
-        <h2 class="section-title">Запишитесь онлайн</h2>
-        <p class="section-sub">Выберите удобное время — мы подтвердим запись в течение 30 минут.</p>
+        <h2 class="section-title">Запишитесь в Viber</h2>
+        <p class="section-sub">Напишите нам в Viber — подберём удобное время и подскажем по уходу.</p>
         <div class="booking-perks">
           <div class="booking-perk">
             <div class="perk-icon">🕐</div>
             <div class="perk-text">
-              <strong>Гибкое расписание</strong>
-              <span>Работаем 7 дней в неделю, уточняйте по телефону</span>
-            </div>
-          </div>
-          <div class="booking-perk">
-            <div class="perk-icon">💬</div>
-            <div class="perk-text">
-              <strong>Напоминание в WhatsApp</strong>
-              <span>Пришлём напоминание за сутки</span>
-            </div>
-          </div>
-          <div class="booking-perk">
-            <div class="perk-icon">🎁</div>
-            <div class="perk-text">
-              <strong>Первое посещение −10%</strong>
-              <span>Скидка для новых клиентов</span>
+              <strong>Время работы</strong>
+              <span>Будни 9:00–20:00 · выходные 10:00–20:00</span>
             </div>
           </div>
         </div>
       </div>
-      <form class="booking-form reveal" id="booking-form" onsubmit="handleBooking(event)">
-        <div class="form-title">Ваша запись 🐾</div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Ваше имя</label>
-            <input type="text" name="name" placeholder="Айгерим" required />
-          </div>
-          <div class="form-group">
-            <label>Телефон</label>
-            <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required />
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Питомец</label>
-            <input type="text" name="pet" placeholder="Макс, лабрадор" required />
-          </div>
-          <div class="form-group">
-            <label>Вид животного</label>
-            <select name="animal" required>
-              <option>🐶 Собака</option>
-              <option>🐱 Кошка</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Пакет услуги</label>
-          <select name="service" required>
-            <option>✂️ Базовый — от 40 BYN</option>
-            <option>✨ Комфорт — от 80 BYN</option>
-            <option>🐱 Для кошек — от 60 BYN</option>
-            <option>💎 Премиум SPA — от 100 BYN</option>
-          </select>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Дата</label>
-            <input type="date" name="date" required />
-          </div>
-          <div class="form-group">
-            <label>Время</label>
-            <select name="time" required>
-              <option>09:00</option>
-              <option>10:00</option>
-              <option>11:00</option>
-              <option>12:00</option>
-              <option>13:00</option>
-              <option>14:00</option>
-              <option>15:00</option>
-              <option>16:00</option>
-              <option>17:00</option>
-              <option>18:00</option>
-              <option>19:00</option>
-            </select>
-          </div>
-        </div>
-        <button class="btn-primary form-submit" type="submit">🐾 Записать питомца</button>
-        <div class="form-message" aria-live="polite"></div>
-      </form>
+      <div class="viber-card reveal">
+        <div class="viber-icon">💜</div>
+        <div class="form-title">Быстрая запись</div>
+        <p>Свяжитесь с Pawfecto напрямую — ответим и согласуем время.</p>
+        <a class="btn-primary viber-button" href="viber://chat?number=%2B375445182514">Записаться в Viber</a>
+        <a class="phone-link" href="tel:+375445182514">+375 (44) 518-25-14</a>
+      </div>
     </div>
   </div>
 </section>
@@ -1199,6 +1239,10 @@
       <div class="section-tag">💬 Отзывы</div>
       <h2 class="section-title">Что говорят клиенты</h2>
       <p class="section-sub">Более 200 довольных владельцев и их питомцев</p>
+    </div>
+    <div class="reviews-controls">
+      <button class="review-nav" type="button" onclick="scrollReviews(-1)" aria-label="Предыдущий отзыв">‹</button>
+      <button class="review-nav" type="button" onclick="scrollReviews(1)" aria-label="Следующий отзыв">›</button>
     </div>
   </div>
   <div class="reviews-track-wrap">
@@ -1419,7 +1463,7 @@
         <p>Профессиональный груминг для кошек и собак в Пружанах. Красота, забота и международный опыт.</p>
         <div class="footer-social">
           <a class="social-btn" href="https://www.instagram.com/pawfecto_grooming/" target="_blank" title="Instagram">📸</a>
-          <a class="social-btn" href="#" title="WhatsApp">💬</a>
+          <a class="social-btn" href="viber://chat?number=%2B375445182514" title="Viber">💜</a>
           <a class="social-btn" href="#" title="Telegram">✈️</a>
           <a class="social-btn" href="#" title="2GIS">📍</a>
         </div>
@@ -1427,11 +1471,11 @@
       <div class="footer-col">
         <h4>Услуги</h4>
         <ul>
-          <li><a href="#">Базовый груминг</a></li>
-          <li><a href="#">Пакет Комфорт</a></li>
-          <li><a href="#">Груминг кошек</a></li>
-          <li><a href="#">Премиум SPA</a></li>
-          <li><a href="#">Все услуги</a></li>
+          <li><a href="#services">Стрижка собак и кошек</a></li>
+          <li><a href="#services">Гигиенический уход</a></li>
+          <li><a href="#services">Экспресс-линька</a></li>
+          <li><a href="#services">SPA-уход</a></li>
+          <li><a href="#services">Чистка ушей и зубов</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1445,15 +1489,14 @@
       <div class="footer-col">
         <h4>Часы работы</h4>
         <div class="footer-hours">
-          <div class="hour-row"><span>Пн – Пт</span><span>9:00 – 20:00</span></div>
-          <div class="hour-row"><span>Суббота</span><span>9:00 – 19:00</span></div>
-          <div class="hour-row"><span>Воскресенье</span><span>10:00 – 18:00</span></div>
+          <div class="hour-row"><span>Будни</span><span>9:00 – 20:00</span></div>
+          <div class="hour-row"><span>Выходные</span><span>10:00 – 20:00</span></div>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
       <span>© 2025 Pawfecto. Пружаны, ул. Советская, 20А</span>
-      <span>Сделано с ❤️ для питомцев и их хозяев</span>
+      <span>Сделано wstdesign.by</span>
     </div>
   </div>
 </footer>
@@ -1476,48 +1519,15 @@
     card.style.transitionDelay = `${i * 80}ms`;
   });
 
-  // Booking handler
-  async function handleBooking(event) {
-    event.preventDefault();
+  function scrollReviews(direction) {
+    const wrap = document.querySelector('.reviews-track-wrap');
+    const card = document.querySelector('.review-card');
+    if (!wrap || !card) return;
 
-    const form = event.currentTarget;
-    const btn = form.querySelector('.form-submit');
-    const message = form.querySelector('.form-message');
-    const data = Object.fromEntries(new FormData(form));
-
-    btn.textContent = 'Отправляем...';
-    btn.disabled = true;
-    message.textContent = '';
-    message.className = 'form-message';
-
-    try {
-      const response = await fetch('/api/bookings', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-      const result = await response.json();
-
-      if (!response.ok || !result.ok) {
-        throw new Error(result.message || 'Не удалось отправить заявку');
-      }
-
-      btn.textContent = '✅ Запись принята!';
-      btn.style.background = '#4CAF50';
-      message.textContent = 'Спасибо! Мы скоро свяжемся с вами.';
-      message.classList.add('success');
-      form.reset();
-    } catch (error) {
-      btn.textContent = '🐾 Записать питомца';
-      message.textContent = error.message;
-      message.classList.add('error');
-    } finally {
-      setTimeout(() => {
-        btn.textContent = '🐾 Записать питомца';
-        btn.style.background = '';
-        btn.disabled = false;
-      }, 3000);
-    }
+    wrap.scrollBy({
+      left: direction * (card.offsetWidth + 24),
+      behavior: 'smooth'
+    });
   }
 
   // Paw cursor trail (subtle)
