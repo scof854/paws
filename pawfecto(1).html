@@ -391,6 +391,7 @@
   }
   .services-list {
     grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
   }
 
   .service-card {
@@ -483,14 +484,24 @@
   .service-feature::before { content: '✓'; color: var(--peach); font-weight: 900; }
   .service-card.featured .service-feature::before { color: var(--peach-light); }
   .services-list .service-card {
-    min-height: 170px;
-    display: flex;
-    flex-direction: column;
+    min-height: 128px;
+    display: grid;
+    grid-template-columns: 54px 1fr;
+    gap: 14px;
+    align-items: center;
     justify-content: center;
+    padding: 22px;
   }
   .services-list .service-name {
     font-size: 1rem;
     line-height: 1.35;
+    margin-bottom: 0;
+  }
+  .services-list .service-icon {
+    width: 54px;
+    height: 54px;
+    font-size: 1.55rem;
+    margin-bottom: 0;
   }
 
   /* ── GALLERY ── */
@@ -1028,28 +1039,23 @@
     .services-header, .gallery-header, .reviews-header { margin-bottom: 24px; }
     .section-title { font-size: 1.75rem; }
     .services-list {
-      display: flex;
-      overflow-x: auto;
-      gap: 14px;
-      padding: 4px 18px 18px;
-      margin: 0 -18px;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
     }
-    .services-list::-webkit-scrollbar { display: none; }
     .services-list .service-card {
-      width: 210px;
-      min-width: 210px;
-      min-height: 140px;
-      padding: 22px;
-      scroll-snap-align: start;
+      min-height: auto;
+      padding: 16px;
+      border-radius: 20px;
     }
     .services-list .service-icon {
-      width: 52px;
-      height: 52px;
-      font-size: 1.5rem;
-      margin-bottom: 14px;
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      font-size: 1.35rem;
+    }
+    .services-list .service-name {
+      font-size: .96rem;
     }
     .gallery-grid {
       display: flex;
