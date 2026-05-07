@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pawfecto — Груминг с любовью</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FFF8F0;
+    --peach: #FFB085;
+    --peach-light: #FFD4B5;
+    --peach-soft: #FFF0E5;
+    --rose: #F9A8B8;
+    --rose-light: #FDDDE6;
+    --brown: #C6885A;
+    --brown-dark: #8B5E3C;
+    --sand: #EDD5B3;
+    --sand-light: #F7ECD9;
+    --mint: #B8E4D4;
+    --lavender: #DDD0F5;
+    --text: #4A3728;
+    --text-light: #8B6B57;
+    --white: #FFFFFF;
+    --shadow-clay: 0 8px 32px rgba(198,136,90,0.18), 0 2px 8px rgba(198,136,90,0.10);
+    --shadow-clay-lg: 0 16px 48px rgba(198,136,90,0.22), 0 4px 16px rgba(198,136,90,0.12);
+    --radius: 28px;
+    --radius-sm: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: .4;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 40px);
+    max-width: 1100px;
+    background: rgba(255,255,255,0.82);
+    backdrop-filter: blur(16px);
+    border-radius: 60px;
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    box-shadow: 0 8px 32px rgba(198,136,90,0.15), 0 2px 0 rgba(255,255,255,0.8) inset;
+    border: 1.5px solid rgba(255,208,180,0.5);
+  }
+
+  .nav-logo {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.6rem;
+    color: var(--brown-dark);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .nav-logo span { font-size: 1.4rem; }
+
+  .nav-links {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-light);
+    font-weight: 700;
+    font-size: .9rem;
+    padding: 8px 18px;
+    border-radius: 30px;
+    transition: all .25s ease;
+  }
+  .nav-links a:hover {
+    background: var(--peach-soft);
+    color: var(--brown-dark);
+  }
+
+  .nav-cta {
+    background: var(--brown-dark);
+    color: white !important;
+    border-radius: 30px !important;
+    padding: 10px 22px !important;
+    box-shadow: 0 4px 12px rgba(139,94,60,0.35);
+    transition: all .25s ease !important;
+  }
+  .nav-cta:hover {
+    background: var(--brown) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(139,94,60,0.4) !important;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 40px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  .hero-bg-blob-1 {
+    width: 600px; height: 600px;
+    background: var(--peach-light);
+    top: -100px; right: -100px;
+  }
+  .hero-bg-blob-2 {
+    width: 400px; height: 400px;
+    background: var(--rose-light);
+    bottom: -50px; left: 10%;
+  }
+  .hero-bg-blob-3 {
+    width: 300px; height: 300px;
+    background: var(--lavender);
+    top: 30%; left: 40%;
+  }
+
+  /* ── COUNTRY BADGES ── */
+  .cert-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 28px;
+  }
+  .cert-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,.12);
+    border: 1.5px solid rgba(255,255,255,.18);
+    border-radius: 30px;
+    padding: 6px 14px;
+    font-size: .82rem;
+    font-weight: 700;
+    color: rgba(255,255,255,.9);
+  }
+
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--rose-light);
+    color: #D4607A;
+    font-weight: 800;
+    font-size: .85rem;
+    padding: 8px 18px;
+    border-radius: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(249,168,184,0.3);
+    animation: bounceIn .6s cubic-bezier(.34,1.56,.64,1) both;
+  }
+
+  .hero h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    line-height: 1.2;
+    color: var(--brown-dark);
+    margin-bottom: 20px;
+    animation: slideUp .7s cubic-bezier(.34,1.56,.64,1) .1s both;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--peach);
+    position: relative;
+  }
+  .hero h1 em::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -4px;
+    width: 100%; height: 6px;
+    background: var(--rose);
+    border-radius: 4px;
+    transform: rotate(-1deg);
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    max-width: 440px;
+    margin-bottom: 36px;
+    animation: slideUp .7s cubic-bezier(.34,1.56,.64,1) .2s both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    animation: slideUp .7s cubic-bezier(.34,1.56,.64,1) .3s both;
+  }
+
+  .btn-primary {
+    background: var(--brown-dark);
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    padding: 16px 32px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(139,94,60,.35), 0 2px 0 rgba(255,255,255,.15) inset;
+    transition: all .25s cubic-bezier(.34,1.56,.64,1);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-primary:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 14px 32px rgba(139,94,60,.4);
+  }
+  .btn-primary:active { transform: translateY(-1px) scale(.99); }
+
+  .btn-secondary {
+    background: white;
+    color: var(--brown-dark);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    padding: 16px 32px;
+    border-radius: 50px;
+    border: 2.5px solid var(--sand);
+    cursor: pointer;
+    box-shadow: var(--shadow-clay);
+    transition: all .25s cubic-bezier(.34,1.56,.64,1);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-secondary:hover {
+    transform: translateY(-4px);
+    border-color: var(--peach);
+    box-shadow: var(--shadow-clay-lg);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 28px;
+    margin-top: 40px;
+    animation: slideUp .7s cubic-bezier(.34,1.56,.64,1) .4s both;
+  }
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-stat strong {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.8rem;
+    color: var(--brown-dark);
+  }
+  .hero-stat span {
+    font-size: .82rem;
+    color: var(--text-light);
+    font-weight: 700;
+  }
+
+  .hero-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    animation: floatIn .8s cubic-bezier(.34,1.56,.64,1) .2s both;
+  }
+
+  .hero-img-card {
+    width: 400px;
+    height: 480px;
+    border-radius: 48px;
+    overflow: hidden;
+    box-shadow: var(--shadow-clay-lg), 0 0 0 8px rgba(255,255,255,.8);
+    position: relative;
+  }
+  .hero-img-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .hero-float-badge {
+    position: absolute;
+    background: white;
+    border-radius: 20px;
+    padding: 12px 18px;
+    box-shadow: var(--shadow-clay);
+    font-weight: 800;
+    font-size: .9rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1.5px solid rgba(255,208,180,0.6);
+  }
+  .hero-float-1 { top: 24px; left: -40px; animation: float 3s ease-in-out infinite; }
+  .hero-float-2 { bottom: 60px; left: -50px; animation: float 3.5s ease-in-out .5s infinite; }
+  .hero-float-3 { bottom: 30px; right: -30px; animation: float 3.2s ease-in-out 1s infinite; }
+
+  /* ── SECTION COMMON ── */
+  section { position: relative; z-index: 1; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+
+  .section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--sand-light);
+    color: var(--brown);
+    font-weight: 800;
+    font-size: .82rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    padding: 6px 16px;
+    border-radius: 30px;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    color: var(--brown-dark);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .section-sub {
+    font-size: 1.05rem;
+    color: var(--text-light);
+    max-width: 500px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+  }
+
+  /* ── SERVICES ── */
+  .services {
+    padding: 100px 0;
+    background: var(--sand-light);
+    overflow: hidden;
+  }
+
+  .services-header { text-align: center; margin-bottom: 56px; }
+  .services-header .section-sub { margin: 0 auto 0; }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+
+  .service-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    box-shadow: var(--shadow-clay);
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+    transition: all .3s cubic-bezier(.34,1.56,.64,1);
+    cursor: pointer;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius);
+    background: linear-gradient(135deg, rgba(255,255,255,.8), rgba(255,255,255,0));
+    pointer-events: none;
+  }
+  .service-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-clay-lg);
+    border-color: var(--peach-light);
+  }
+
+  .service-card.featured {
+    background: var(--brown-dark);
+    color: white;
+  }
+  .service-card.featured .service-name { color: white; }
+  .service-card.featured .service-desc { color: rgba(255,255,255,.75); }
+  .service-card.featured .service-price { color: var(--peach-light); }
+  .service-card.featured .service-feature { color: rgba(255,255,255,.8); }
+  .service-card.featured::after {
+    content: '⭐ Хит';
+    position: absolute;
+    top: 20px; right: 20px;
+    background: var(--peach);
+    color: var(--brown-dark);
+    font-weight: 800;
+    font-size: .78rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+
+  .service-icon {
+    width: 64px; height: 64px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.08);
+  }
+  .service-card:not(.featured) .service-icon { background: var(--peach-soft); }
+  .service-card.featured .service-icon { background: rgba(255,255,255,.15); }
+
+  .service-name {
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .service-desc {
+    font-size: .9rem;
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .service-price {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.6rem;
+    color: var(--brown-dark);
+    margin-bottom: 16px;
+  }
+  .service-price span { font-family: 'Nunito', sans-serif; font-size: .9rem; font-weight: 700; opacity: .6; }
+
+  .service-features { list-style: none; }
+  .service-feature {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: .875rem;
+    color: var(--text-light);
+    padding: 5px 0;
+  }
+  .service-feature::before { content: '✓'; color: var(--peach); font-weight: 900; }
+  .service-card.featured .service-feature::before { color: var(--peach-light); }
+
+  /* ── GALLERY ── */
+  .gallery { padding: 100px 0; }
+  .gallery-header { margin-bottom: 48px; }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 320px 320px;
+    gap: 20px;
+  }
+  .gallery-item {
+    border-radius: var(--radius);
+    overflow: hidden;
+    position: relative;
+    box-shadow: var(--shadow-clay);
+    cursor: pointer;
+    transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s;
+  }
+  .gallery-item:hover { transform: scale(1.03); box-shadow: var(--shadow-clay-lg); }
+  .gallery-item:first-child { grid-row: span 2; }
+
+  .gallery-item-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  .gallery-item-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    transition: transform .4s ease;
+  }
+  .gallery-item:hover .gallery-item-inner img { transform: scale(1.06); }
+  .gallery-item-inner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(74,55,40,.5));
+    z-index: 1;
+    opacity: 0;
+    transition: opacity .3s;
+  }
+  .gallery-item:hover .gallery-item-inner::before { opacity: 1; }
+
+  .gallery-label {
+    position: absolute;
+    bottom: 16px; left: 16px;
+    background: rgba(255,255,255,.92);
+    backdrop-filter: blur(8px);
+    border-radius: 12px;
+    padding: 8px 14px;
+    font-weight: 800;
+    font-size: .82rem;
+    color: var(--text);
+    z-index: 2;
+    transform: translateY(8px);
+    opacity: 0;
+    transition: all .3s;
+  }
+  .gallery-item:hover .gallery-label { transform: translateY(0); opacity: 1; }
+
+  .gallery-before-after {
+    position: absolute;
+    top: 12px; right: 12px;
+    display: flex;
+    gap: 6px;
+    z-index: 2;
+  }
+  .ba-tag {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 800;
+    font-size: .75rem;
+  }
+  .ba-before { background: var(--rose-light); color: #D4607A; }
+  .ba-after { background: var(--mint); color: #2E8B6A; }
+
+  /* Mock pet images using CSS art */
+  .pet-mock {
+    width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    position: relative;
+  }
+  .pet-mock-1 { background: linear-gradient(135deg, #FFE4CC, #FFB085); }
+  .pet-mock-2 { background: linear-gradient(135deg, #FDDDE6, #F9A8B8); }
+  .pet-mock-3 { background: linear-gradient(135deg, #DDD0F5, #C8B4F0); }
+  .pet-mock-4 { background: linear-gradient(135deg, #B8E4D4, #7DD4B8); }
+  .pet-mock-5 { background: linear-gradient(135deg, #EDD5B3, #C6885A); }
+
+  /* ── BOOKING ── */
+  .booking {
+    padding: 100px 0;
+    background: var(--sand-light);
+  }
+
+  .booking-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .booking-info h2 { margin-bottom: 16px; }
+
+  .booking-perks {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .booking-perk {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: white;
+    border-radius: var(--radius-sm);
+    padding: 16px 20px;
+    box-shadow: var(--shadow-clay);
+  }
+  .perk-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: var(--peach-soft);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+  .perk-text strong { display: block; font-weight: 800; font-size: .95rem; }
+  .perk-text span { font-size: .85rem; color: var(--text-light); }
+
+  .booking-form {
+    background: white;
+    border-radius: var(--radius);
+    padding: 36px;
+    box-shadow: var(--shadow-clay-lg);
+  }
+  .form-title {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.4rem;
+    color: var(--brown-dark);
+    margin-bottom: 24px;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+  .form-group label {
+    font-weight: 800;
+    font-size: .85rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    border: 2px solid var(--sand);
+    border-radius: 14px;
+    padding: 12px 16px;
+    font-family: 'Nunito', sans-serif;
+    font-size: .95rem;
+    font-weight: 600;
+    color: var(--text);
+    background: var(--cream);
+    outline: none;
+    transition: all .2s;
+    appearance: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--peach);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(255,176,133,.15);
+  }
+  .form-submit {
+    width: 100%;
+    padding: 16px;
+    font-size: 1.05rem;
+    margin-top: 8px;
+  }
+  .form-message {
+    margin-top: 14px;
+    font-weight: 800;
+    text-align: center;
+    color: var(--text-light);
+  }
+  .form-message.success { color: #2E8B6A; }
+  .form-message.error { color: #D4607A; }
+
+  /* ── REVIEWS ── */
+  .reviews { padding: 100px 0; overflow: hidden; }
+  .reviews-header { text-align: center; margin-bottom: 52px; }
+  .reviews-header .section-sub { margin: 0 auto; }
+
+  .reviews-track-wrap { overflow: hidden; position: relative; }
+  .reviews-track-wrap::before,
+  .reviews-track-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .reviews-track-wrap::before { left: 0; background: linear-gradient(90deg, var(--cream), transparent); }
+  .reviews-track-wrap::after { right: 0; background: linear-gradient(-90deg, var(--cream), transparent); }
+
+  .reviews-track {
+    display: flex;
+    gap: 24px;
+    animation: scrollTrack 28s linear infinite;
+    width: max-content;
+  }
+  .reviews-track:hover { animation-play-state: paused; }
+
+  .review-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 28px;
+    width: 320px;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-clay);
+    transition: transform .25s cubic-bezier(.34,1.56,.64,1);
+  }
+  .review-card:hover { transform: translateY(-6px); }
+
+  .review-stars { font-size: 1.1rem; margin-bottom: 12px; }
+  .review-text {
+    font-size: .92rem;
+    color: var(--text-light);
+    line-height: 1.65;
+    margin-bottom: 20px;
+  }
+  .review-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .review-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,.08);
+  }
+  .review-name { font-weight: 800; font-size: .9rem; }
+  .review-pet { font-size: .8rem; color: var(--text-light); }
+
+  /* ── ABOUT ── */
+  .about { padding: 100px 0; background: var(--brown-dark); color: white; overflow: hidden; }
+
+  .about-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .about-visual { position: relative; }
+  .about-img {
+    width: 100%; max-width: 420px;
+    aspect-ratio: 3/4;
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,.3);
+    position: relative;
+  }
+  .about-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+  .about-img-bg {
+    position: absolute;
+    width: 100%; max-width: 420px;
+    aspect-ratio: 3/4;
+    border-radius: 40px;
+    background: var(--peach);
+    top: 20px; left: 20px;
+    z-index: -1;
+    opacity: .4;
+  }
+
+  .about-content .section-tag { background: rgba(255,208,180,.2); color: var(--peach-light); }
+  .about-content .section-title { color: white; }
+  .about-content .section-sub { color: rgba(255,255,255,.7); max-width: 100%; }
+
+  .about-perks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .about-perk {
+    background: rgba(255,255,255,.08);
+    border: 1.5px solid rgba(255,255,255,.12);
+    border-radius: var(--radius-sm);
+    padding: 20px;
+    transition: all .25s;
+  }
+  .about-perk:hover { background: rgba(255,255,255,.12); transform: translateY(-4px); }
+  .about-perk-icon { font-size: 1.8rem; margin-bottom: 8px; }
+  .about-perk-name { font-weight: 800; font-size: .95rem; margin-bottom: 4px; }
+  .about-perk-desc { font-size: .82rem; color: rgba(255,255,255,.6); line-height: 1.5; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #2D1F15;
+    color: white;
+    padding: 64px 0 32px;
+  }
+
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+
+  .footer-brand .nav-logo { font-size: 1.8rem; margin-bottom: 16px; }
+  .footer-brand p { font-size: .9rem; color: rgba(255,255,255,.5); line-height: 1.7; max-width: 240px; }
+
+  .footer-social {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .social-btn {
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    background: rgba(255,255,255,.08);
+    border: 1.5px solid rgba(255,255,255,.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all .2s;
+    text-decoration: none;
+  }
+  .social-btn:hover { background: var(--peach); border-color: var(--peach); transform: translateY(-3px); }
+
+  .footer-col h4 {
+    font-weight: 800;
+    font-size: .9rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: rgba(255,255,255,.5);
+    margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 10px; }
+  .footer-col ul li a {
+    color: rgba(255,255,255,.75);
+    text-decoration: none;
+    font-size: .9rem;
+    font-weight: 600;
+    transition: color .2s;
+  }
+  .footer-col ul li a:hover { color: var(--peach); }
+
+  .footer-hours {
+    background: rgba(255,255,255,.06);
+    border-radius: var(--radius-sm);
+    padding: 20px;
+  }
+  .hour-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: .88rem;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .hour-row:last-child { border-bottom: none; }
+  .hour-row span:first-child { color: rgba(255,255,255,.5); }
+  .hour-row span:last-child { font-weight: 700; color: rgba(255,255,255,.85); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,.08);
+    padding-top: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: .85rem;
+    color: rgba(255,255,255,.35);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes bounceIn {
+    from { opacity: 0; transform: scale(.6); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes floatIn {
+    from { opacity: 0; transform: translateX(40px) scale(.95); }
+    to { opacity: 1; transform: translateX(0) scale(1); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  @keyframes scrollTrack {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity .6s ease, transform .6s cubic-bezier(.34,1.56,.64,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    nav { padding: 12px 20px; top: 12px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 24px 60px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+    .hero-visual { order: -1; }
+    .hero-img-card { width: 100%; max-width: 360px; height: 360px; }
+    .hero-float-1 { display: none; }
+    .hero-float-2 { left: 0; }
+    .hero-float-3 { right: 0; }
+    .container { padding: 0 24px; }
+    .services { padding: 64px 0; }
+    .services-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 220px 220px 220px; }
+    .gallery-item:first-child { grid-row: span 1; }
+    .booking-inner { grid-template-columns: 1fr; }
+    .about-inner { grid-template-columns: 1fr; gap: 40px; }
+    .about-img { max-width: 100%; }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 580px) {
+    .hero-stats { gap: 16px; }
+    .about-perks { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr; grid-template-rows: repeat(5, 260px); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><span>🐾</span> Pawfecto</div>
+  <ul class="nav-links">
+    <li><a href="#services">Услуги</a></li>
+    <li><a href="#gallery">Галерея</a></li>
+    <li><a href="#about">О нас</a></li>
+    <li><a href="#booking" class="nav-cta">Записаться</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg-blob hero-bg-blob-1"></div>
+  <div class="hero-bg-blob hero-bg-blob-2"></div>
+  <div class="hero-bg-blob hero-bg-blob-3"></div>
+  <div class="hero-inner container">
+    <div class="hero-content">
+      <div class="hero-badge">🌟 Груминг с душой · Пружаны, Беларусь</div>
+      <h1>Ваш питомец заслуживает<br><em>лучшего</em></h1>
+      <p class="hero-sub">Pawfecto — профессиональный груминг для кошек и собак. Красота, забота и комфорт в каждом посещении.</p>
+      <div class="hero-actions">
+        <a href="#booking" class="btn-primary">✂️ Записаться сейчас</a>
+        <a href="#services" class="btn-secondary">Смотреть услуги →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <strong>500+</strong>
+          <span>Счастливых питомцев</span>
+        </div>
+        <div class="hero-stat">
+          <strong>4.9★</strong>
+          <span>Рейтинг</span>
+        </div>
+        <div class="hero-stat">
+          <strong>3 года</strong>
+          <span>Опыта</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-img-card">
+        <img src="/images/photo_6_2026-05-06_17-51-33.jpg" alt="Пушистый померанский шпиц рыжего окраса после полного ухода в Pawfecto" loading="eager" />
+      </div>
+      <div class="hero-float-badge hero-float-1">🐶 Мягкая шерсть</div>
+      <div class="hero-float-badge hero-float-2">💅 Стрижка когтей</div>
+      <div class="hero-float-badge hero-float-3">✨ До/после</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="services-header">
+      <div class="section-tag">✂️ Наши услуги</div>
+      <h2 class="section-title">Пакеты груминга</h2>
+      <p class="section-sub">Выберите подходящий пакет — каждый разработан с заботой о здоровье и красоте вашего питомца</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">🛁</div>
+        <div class="service-name">Базовый</div>
+        <p class="service-desc">Всё самое необходимое для свежести и чистоты вашего питомца.</p>
+        <div class="service-price">от 40 BYN <span>/ сеанс</span></div>
+        <ul class="service-features">
+          <li class="service-feature">Купание + сушка</li>
+          <li class="service-feature">Расчёсывание</li>
+          <li class="service-feature">Чистка ушей</li>
+          <li class="service-feature">Стрижка когтей</li>
+        </ul>
+      </div>
+      <div class="service-card featured reveal">
+        <div class="service-icon">✨</div>
+        <div class="service-name">Комфорт</div>
+        <p class="service-desc">Полноценный уход — для тех, кто хочет всего самого лучшего.</p>
+        <div class="service-price">от 80 BYN <span>/ сеанс</span></div>
+        <ul class="service-features">
+          <li class="service-feature">Всё из базового</li>
+          <li class="service-feature">Авторская стрижка</li>
+          <li class="service-feature">Аромаванна</li>
+          <li class="service-feature">Укладка и styling</li>
+          <li class="service-feature">Бандана в подарок</li>
+        </ul>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🐱</div>
+        <div class="service-name">Для кошек</div>
+        <p class="service-desc">Специальный уход для пушистых и короткошёрстных кошек.</p>
+        <div class="service-price">от 60 BYN <span>/ сеанс</span></div>
+        <ul class="service-features">
+          <li class="service-feature">Деликатное купание</li>
+          <li class="service-feature">Вычёсывание подшёрстка</li>
+          <li class="service-feature">Чистка ушей и когтей</li>
+          <li class="service-feature">Антистресс-уход</li>
+        </ul>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">💎</div>
+        <div class="service-name">Премиум SPA</div>
+        <p class="service-desc">Королевское обращение для самых избалованных питомцев.</p>
+        <div class="service-price">от 100 BYN <span>/ сеанс</span></div>
+        <ul class="service-features">
+          <li class="service-feature">Всё из Комфорта</li>
+          <li class="service-feature">Маска для шерсти</li>
+          <li class="service-feature">Массаж</li>
+          <li class="service-feature">Фото-сессия</li>
+          <li class="service-feature">Подарочный набор</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="container">
+    <div class="gallery-header">
+      <div class="section-tag">📸 Результаты</div>
+      <h2 class="section-title">До и после</h2>
+      <p class="section-sub">Смотрите сами — наша работа говорит громче слов</p>
+    </div>
+    <div class="gallery-grid reveal">
+      <div class="gallery-item">
+        <div class="gallery-item-inner" style="background:#EDD5B3">
+          <img src="/images/photo_5_2026-05-06_17-51-33.jpg" alt="Померанский шпиц со стрижкой «медвежонок» после груминга" loading="lazy" />
+        </div>
+        <div class="gallery-before-after"><span class="ba-tag ba-after">После</span></div>
+        <div class="gallery-label">Померанский шпиц — стрижка «медвежонок»</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-item-inner" style="background:#FFE4CC">
+          <img src="/images/photo_4_2026-05-06_17-51-33.jpg" alt="Той-пудель рыжего окраса после авторской стрижки" loading="lazy" />
+        </div>
+        <div class="gallery-before-after"><span class="ba-tag ba-after">После</span></div>
+        <div class="gallery-label">Той-пудель — авторская стрижка</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-item-inner" style="background:#F5F5F5">
+          <img src="/images/photo_3_2026-05-06_17-51-33.jpg" alt="Жесткошёрстный фокстерьер после выставочного тримминга в Pawfecto" loading="lazy" />
+        </div>
+        <div class="gallery-before-after"><span class="ba-tag ba-after">После</span></div>
+        <div class="gallery-label">Жесткошёрстный фокстерьер — выставочный тримминг</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-item-inner" style="background:#F7ECD9">
+          <img src="/images/photo_2_2026-05-06_17-51-33.jpg" alt="Мальтезе с классической стрижкой после груминга" loading="lazy" />
+        </div>
+        <div class="gallery-before-after"><span class="ba-tag ba-after">После</span></div>
+        <div class="gallery-label">Мальтезе — классическая стрижка</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-item-inner" style="background:#FFE4CC">
+          <img src="/images/photo_1_2026-05-06_17-51-32.jpg" alt="Померанский шпиц после стрижки «плюшевый мишка»" loading="lazy" />
+        </div>
+        <div class="gallery-before-after"><span class="ba-tag ba-after">После</span></div>
+        <div class="gallery-label">Померанский шпиц — стрижка «плюшевый мишка»</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking" id="booking">
+  <div class="container">
+    <div class="booking-inner">
+      <div class="booking-info reveal">
+        <div class="section-tag">📅 Запись</div>
+        <h2 class="section-title">Запишитесь онлайн</h2>
+        <p class="section-sub">Выберите удобное время — мы подтвердим запись в течение 30 минут.</p>
+        <div class="booking-perks">
+          <div class="booking-perk">
+            <div class="perk-icon">🕐</div>
+            <div class="perk-text">
+              <strong>Гибкое расписание</strong>
+              <span>Работаем 7 дней в неделю, уточняйте по телефону</span>
+            </div>
+          </div>
+          <div class="booking-perk">
+            <div class="perk-icon">💬</div>
+            <div class="perk-text">
+              <strong>Напоминание в WhatsApp</strong>
+              <span>Пришлём напоминание за сутки</span>
+            </div>
+          </div>
+          <div class="booking-perk">
+            <div class="perk-icon">🎁</div>
+            <div class="perk-text">
+              <strong>Первое посещение −10%</strong>
+              <span>Скидка для новых клиентов</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form class="booking-form reveal" id="booking-form" onsubmit="handleBooking(event)">
+        <div class="form-title">Ваша запись 🐾</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Ваше имя</label>
+            <input type="text" name="name" placeholder="Айгерим" required />
+          </div>
+          <div class="form-group">
+            <label>Телефон</label>
+            <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Питомец</label>
+            <input type="text" name="pet" placeholder="Макс, лабрадор" required />
+          </div>
+          <div class="form-group">
+            <label>Вид животного</label>
+            <select name="animal" required>
+              <option>🐶 Собака</option>
+              <option>🐱 Кошка</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Пакет услуги</label>
+          <select name="service" required>
+            <option>✂️ Базовый — от 40 BYN</option>
+            <option>✨ Комфорт — от 80 BYN</option>
+            <option>🐱 Для кошек — от 60 BYN</option>
+            <option>💎 Премиум SPA — от 100 BYN</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Дата</label>
+            <input type="date" name="date" required />
+          </div>
+          <div class="form-group">
+            <label>Время</label>
+            <select name="time" required>
+              <option>09:00</option>
+              <option>10:00</option>
+              <option>11:00</option>
+              <option>12:00</option>
+              <option>13:00</option>
+              <option>14:00</option>
+              <option>15:00</option>
+              <option>16:00</option>
+              <option>17:00</option>
+              <option>18:00</option>
+              <option>19:00</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn-primary form-submit" type="submit">🐾 Записать питомца</button>
+        <div class="form-message" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="reviews">
+  <div class="container">
+    <div class="reviews-header">
+      <div class="section-tag">💬 Отзывы</div>
+      <h2 class="section-title">Что говорят клиенты</h2>
+      <p class="section-sub">Более 200 довольных владельцев и их питомцев</p>
+    </div>
+  </div>
+  <div class="reviews-track-wrap">
+    <div class="reviews-track" id="reviews-track">
+      <div class="review-card">
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <p class="review-text">У нас померанский шпиц, приехали на отдых из России. Цена очень порадовала — в два раза меньше, чем отдаём у себя! Сделали на 10/10, никогда не видела свою собаку такой красивой!</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:#FFE4CC">🐩</div>
+          <div>
+            <div class="review-name">Полина Юшкевич</div>
+            <div class="review-pet">Померанский шпиц · Яндекс Карты</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <p class="review-text">Благодарю за отлично выполненную работу. Наша собачка невероятно преобразилась. Всё очень аккуратно и эстетично!!! Рекомендую Pawfecto!!!</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:#FDDDE6">🐶</div>
+          <div>
+            <div class="review-name">Екатерина А.</div>
+            <div class="review-pet">Яндекс Карты · май 2025</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <p class="review-text">Впервые воспользовались услугами Pawfecto — и мы в восторге! Доволен питомец, а значит и мы. Хороший сервис, консультирование по всем интересующим вопросам. Рады, что вы есть в нашем городе ❤️</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:#B8E4D4">🐾</div>
+          <div>
+            <div class="review-name">Татьяна</div>
+            <div class="review-pet">Яндекс Карты · май 2024</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <p class="review-text">Какое счастье увидеть свою любимицу красавицей с модной стрижкой и вкусно пахнущей! Шерсть блестела не хуже бриллианта! Огромное спасибо за ваш труд — вы супер специалисты и просто чудесные люди!</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:#DDD0F5">🐕</div>
+          <div>
+            <div class="review-name">Elena D.</div>
+            <div class="review-pet">Яндекс Карты · май 2024</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <p class="review-text">Делали груминг своей любимой собачке. Приятная и доброжелательная атмосфера, качественный сервис. Самое главное — собака пережила всё спокойно, хотя для неё это всегда стресс. Спасибо огромнейшее!</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:#FFD4B5">🐩</div>
+          <div>
+            <div class="review-name">Анастасия Хмара</div>
+            <div class="review-pet">Яндекс Карты · февраль 2024</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <p class="review-text">Огромное СПАСИБО от меня и Чарлика. Всё очень понравилось и обслуживание, и обстановка, и внимание. Собачку не узнать. Грумер — мастер своего дела. Очень советую Pawfecto. Кто ещё думает? Идите!</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:#FFE4CC">🐶</div>
+          <div>
+            <div class="review-name">Елена Малыха</div>
+            <div class="review-pet">Яндекс Карты · сентябрь 2024</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <p class="review-text">Отличный салон, очень вежливый и терпеливый специалист. Смогла приручить «дракона» 😄 Огромное спасибо!</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:#B8E4D4">🐈</div>
+          <div>
+            <div class="review-name">БРПО Пружаны</div>
+            <div class="review-pet">Яндекс Карты · март 2025</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <p class="review-text">Мы были в шоке от преображения нашей собаки. Лучшие в своём деле ❤️</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:#FDDDE6">🐾</div>
+          <div>
+            <div class="review-name">Manlaser.by</div>
+            <div class="review-pet">Яндекс Карты · май 2024</div>
+          </div>
+        </div>
+      </div>
+      <!-- Duplicate set for seamless loop -->
+      <div class="review-card">
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <p class="review-text">У нас померанский шпиц, приехали на отдых из России. Цена очень порадовала — в два раза меньше, чем отдаём у себя! Сделали на 10/10, никогда не видела свою собаку такой красивой!</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:#FFE4CC">🐩</div>
+          <div>
+            <div class="review-name">Полина Юшкевич</div>
+            <div class="review-pet">Померанский шпиц · Яндекс Карты</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <p class="review-text">Благодарю за отлично выполненную работу. Наша собачка невероятно преобразилась. Всё очень аккуратно и эстетично!!! Рекомендую Pawfecto!!!</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:#FDDDE6">🐶</div>
+          <div>
+            <div class="review-name">Екатерина А.</div>
+            <div class="review-pet">Яндекс Карты · май 2025</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <p class="review-text">Впервые воспользовались услугами Pawfecto — и мы в восторге! Доволен питомец, а значит и мы. Хороший сервис, консультирование по всем интересующим вопросам. Рады, что вы есть в нашем городе ❤️</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:#B8E4D4">🐾</div>
+          <div>
+            <div class="review-name">Татьяна</div>
+            <div class="review-pet">Яндекс Карты · май 2024</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <p class="review-text">Делали груминг своей любимой собачке. Приятная и доброжелательная атмосфера, качественный сервис. Самое главное — собака пережила всё спокойно, хотя для неё это всегда стресс. Спасибо огромнейшее!</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:#FFD4B5">🐩</div>
+          <div>
+            <div class="review-name">Анастасия Хмара</div>
+            <div class="review-pet">Яндекс Карты · февраль 2024</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <p class="review-text">Огромное СПАСИБО от меня и Чарлика. Всё очень понравилось и обслуживание, и обстановка, и внимание. Собачку не узнать. Грумер — мастер своего дела. Очень советую Pawfecto. Кто ещё думает? Идите!</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:#FFE4CC">🐶</div>
+          <div>
+            <div class="review-name">Елена Малыха</div>
+            <div class="review-pet">Яндекс Карты · сентябрь 2024</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <p class="review-text">Мы были в шоке от преображения нашей собаки. Лучшие в своём деле ❤️</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:#FDDDE6">🐾</div>
+          <div>
+            <div class="review-name">Manlaser.by</div>
+            <div class="review-pet">Яндекс Карты · май 2024</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-visual reveal">
+        <div class="about-img">
+          <img src="/images/photo_3_2026-05-06_17-51-33.jpg" alt="Сертифицированный мастер-грумер Pawfecto со своим клиентом — фокстерьером" loading="lazy" />
+        </div>
+        <div class="about-img-bg"></div>
+      </div>
+      <div class="about-content reveal">
+        <div class="section-tag">🐾 О нас</div>
+        <h2 class="section-title">Груминг — это не просто стрижка, это искусство</h2>
+        <p class="section-sub">Pawfecto — это не просто груминг, это забота с душой. Сертифицированный мастер с международным опытом: Малайзия, Китай, США, Великобритания. Дополнительно изучала ветеринарную медицину — знаю, как сделать процедуры безопасными и комфортными для каждого питомца.</p>
+        <div class="cert-badges">
+          <span class="cert-badge">🇲🇾 Малайзия</span>
+          <span class="cert-badge">🇨🇳 Китай</span>
+          <span class="cert-badge">🇺🇸 США</span>
+          <span class="cert-badge">🇬🇧 Великобритания</span>
+          <span class="cert-badge">🩺 Ветеринарная медицина</span>
+        </div>
+        <div class="about-perks">
+          <div class="about-perk">
+            <div class="about-perk-icon">🏆</div>
+            <div class="about-perk-name">Международные сертификаты</div>
+            <div class="about-perk-desc">США, Малайзия, Китай, Великобритания</div>
+          </div>
+          <div class="about-perk">
+            <div class="about-perk-icon">🩺</div>
+            <div class="about-perk-name">Ветеринарные знания</div>
+            <div class="about-perk-desc">Изучала ветеринарную медицину — ваш питомец в безопасности</div>
+          </div>
+          <div class="about-perk">
+            <div class="about-perk-icon">💚</div>
+            <div class="about-perk-name">Безопасная косметика</div>
+            <div class="about-perk-desc">Только гипоаллергенные и натуральные средства</div>
+          </div>
+          <div class="about-perk">
+            <div class="about-perk-icon">😌</div>
+            <div class="about-perk-name">Антистресс-подход</div>
+            <div class="about-perk-desc">Терпеливо работаю даже с тревожными питомцами</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo">🐾 Pawfecto</div>
+        <p>Профессиональный груминг для кошек и собак в Пружанах. Красота, забота и международный опыт.</p>
+        <div class="footer-social">
+          <a class="social-btn" href="https://www.instagram.com/pawfecto_grooming/" target="_blank" title="Instagram">📸</a>
+          <a class="social-btn" href="#" title="WhatsApp">💬</a>
+          <a class="social-btn" href="#" title="Telegram">✈️</a>
+          <a class="social-btn" href="#" title="2GIS">📍</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Услуги</h4>
+        <ul>
+          <li><a href="#">Базовый груминг</a></li>
+          <li><a href="#">Пакет Комфорт</a></li>
+          <li><a href="#">Груминг кошек</a></li>
+          <li><a href="#">Премиум SPA</a></li>
+          <li><a href="#">Все услуги</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Контакты</h4>
+        <ul>
+          <li><a href="tel:+375445182514">+375 (44) 518-25-14</a></li>
+          <li><a href="#">г. Пружаны, Беларусь</a></li>
+          <li><a href="#">ул. Советская, 20А</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Часы работы</h4>
+        <div class="footer-hours">
+          <div class="hour-row"><span>Пн – Пт</span><span>9:00 – 20:00</span></div>
+          <div class="hour-row"><span>Суббота</span><span>9:00 – 19:00</span></div>
+          <div class="hour-row"><span>Воскресенье</span><span>10:00 – 18:00</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Pawfecto. Пружаны, ул. Советская, 20А</span>
+      <span>Сделано с ❤️ для питомцев и их хозяев</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Stagger service cards
+  document.querySelectorAll('.service-card').forEach((card, i) => {
+    card.style.transitionDelay = `${i * 80}ms`;
+  });
+
+  // Booking handler
+  async function handleBooking(event) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const btn = form.querySelector('.form-submit');
+    const message = form.querySelector('.form-message');
+    const data = Object.fromEntries(new FormData(form));
+
+    btn.textContent = 'Отправляем...';
+    btn.disabled = true;
+    message.textContent = '';
+    message.className = 'form-message';
+
+    try {
+      const response = await fetch('/api/bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const result = await response.json();
+
+      if (!response.ok || !result.ok) {
+        throw new Error(result.message || 'Не удалось отправить заявку');
+      }
+
+      btn.textContent = '✅ Запись принята!';
+      btn.style.background = '#4CAF50';
+      message.textContent = 'Спасибо! Мы скоро свяжемся с вами.';
+      message.classList.add('success');
+      form.reset();
+    } catch (error) {
+      btn.textContent = '🐾 Записать питомца';
+      message.textContent = error.message;
+      message.classList.add('error');
+    } finally {
+      setTimeout(() => {
+        btn.textContent = '🐾 Записать питомца';
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 3000);
+    }
+  }
+
+  // Paw cursor trail (subtle)
+  const paws = ['🐾'];
+  let lastTime = 0;
+  document.addEventListener('mousemove', (e) => {
+    const now = Date.now();
+    if (now - lastTime < 400) return;
+    lastTime = now;
+    const el = document.createElement('div');
+    el.style.cssText = `
+      position:fixed; left:${e.clientX-10}px; top:${e.clientY-10}px;
+      font-size:16px; pointer-events:none; z-index:9999;
+      animation: pawFade .6s ease forwards;
+    `;
+    el.textContent = '🐾';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 600);
+  });
+
+  const style = document.createElement('style');
+  style.textContent = `@keyframes pawFade { from{opacity:.7;transform:scale(1)} to{opacity:0;transform:scale(1.8) rotate(20deg)} }`;
+  document.head.appendChild(style);
+</script>
+</body>
+</html>
