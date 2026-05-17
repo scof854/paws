@@ -11,6 +11,7 @@ const bookingsPath = path.join(rootDir, 'data', 'bookings.jsonl');
 
 app.use(express.json({ limit: '20kb' }));
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(rootDir, 'public'), { index: false }));
 app.use(express.static(rootDir, { index: false }));
 
 app.get('/', (req, res) => {
